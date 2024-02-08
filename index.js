@@ -20,7 +20,15 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 const PORT = 3000 || process.env.PORT
 
+// Run when a client connects
+io.on('connection', socket => {
+    socket.on('joinRoom', ({ username, room }) => {
+        const user = newUser(socket.id, username, room);
+        socket.join(user.room); // subscribe user to a room
 
+        
+    });
+});
 
 
 // Start the server
