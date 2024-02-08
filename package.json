@@ -1,0 +1,23 @@
+{
+  "name": "chatty",
+  "version": "1.0.0",
+  "description": "A chat application that implements websockets for real time communication.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prodigysec/Chatty.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prodigysec/Chatty/issues"
+  },
+  "homepage": "https://github.com/Prodigysec/Chatty#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
