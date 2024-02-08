@@ -26,6 +26,13 @@ io.on('connection', socket => {
         const user = newUser(socket.id, username, room);
         socket.join(user.room); // subscribe user to a room
 
+        // Welcome current user
+        socket.emit('message', formatMessage('Chatty', 'Welcome to Chatty!'));
+
+        // Broadcast when a user connects
+        socket.broadcast
+            .to(user.room)
+            .emit('message', formatMessage('Chatty', `${user.username} has joined the room`));
         
     });
 });
