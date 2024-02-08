@@ -45,9 +45,12 @@ io.on('connection', socket => {
             room: user.room,
             users: getIndividualRoomUsers(user.room)
         });
+    });
 
-
-
+    // Listen for chatMessage
+    socket.on('chatMessage', msg => {
+        const user = getActiveUser(socket.id);
+        io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 });
 
