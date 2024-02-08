@@ -52,6 +52,25 @@ io.on('connection', socket => {
         const user = getActiveUser(socket.id);
         io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
+
+    // Runs when client disconnects
+    socket.on('disconnect', () => {
+    const user = exitRoom(socket.id);
+    if (user) {
+        io.to(user.room).emit(
+        'message',
+        formatMessage("Chatty", `${user.username} has left the room`)
+        );
+
+        // Current active users and room name
+        io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getIndividualRoomUsers(user.room)
+        });
+    }
+
+
+    });
 });
 
 
