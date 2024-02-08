@@ -32,8 +32,22 @@ io.on('connection', socket => {
         // Broadcast when a user connects
         socket.broadcast
             .to(user.room)
-            .emit('message', formatMessage('Chatty', `${user.username} has joined the room`));
-        
+            .emit('message', formatMessage('Chatty', `${user.username} has joined the room`)); // emit to everyone in the room except the user
+
+        // Send users and room info
+        io.to(user.room).emit('roomUsers', {
+            room: user.room,
+            users: getIndividualRoomUsers(user.room)
+        });
+
+        // Get room users
+        io.to(user.room).emit('roomUsers', {
+            room: user.room,
+            users: getIndividualRoomUsers(user.room)
+        });
+
+
+
     });
 });
 
